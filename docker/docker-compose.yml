@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: tfg-sqlserver
+    env_file:
+      - ../.env
+    environment:
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    networks:
+      - tfg-network
+
+  api:
+    build:
+      context: ..
+      dockerfile: src/API/Dockerfile
+    container_name: tfg-api
+    ports:
+      - "5000:8080"
+    depends_on:
+      - sqlserver
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=${DB_NAME};User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+    networks:
+      - tfg-network
+
+volumes:
+  sql_data:
+
+networks:
+  tfg-network:
