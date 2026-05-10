@@ -1,0 +1,137 @@
+﻿body {
+    background-color: #0b0a0e;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 160px 0 120px;
+}
+
+.hero-text {
+    max-width: 720px;
+}
+
+.eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #807889;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: #ECE7E0;
+}
+
+h1 em {
+    font-style: italic;
+    background: linear-gradient(115deg, #BA68C8, #E2C5EE 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #B6AFBE;
+    margin-top: 1rem;
+    max-width: 420px;
+}
+
+.ctas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 480px;
+    margin-top: 3rem;
+}
+
+.cta {
+    padding: 22px 24px 26px;
+    border: 1px solid #221d2c;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,.015), rgba(255,255,255,0));
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .25s, transform .25s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cta:hover {
+    border-color: #BA68C8;
+    transform: translateY(-2px);
+}
+
+.cta.primary {
+    background: linear-gradient(160deg, rgba(186,104,200,.16), rgba(123,31,162,.06));
+    border-color: #3d2949;
+}
+
+.role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #807889;
+    width: 100%;
+}
+
+.cta.primary .role {
+    color: #E2C5EE;
+}
+
+.label {
+    font-size: 1.1rem;
+    color: #ECE7E0;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #16131d;
+    border: 1px solid #2a2438;
+    font-size: 13px;
+    color: #b6afbe;
+    transition: background .25s, color .25s, transform .25s;
+}
+
+.cta:hover .arrow {
+    background: linear-gradient(135deg, #BA68C8, #7B1FA2);
+    color: white;
+    border-color: transparent;
+    transform: translateX(2px);
+}
+
+.label {
+    width: 100%;
+}
+
+.hero-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #807889;
+}
+
+.hero-meta b {
+    color: #ECE7E0;
+    font-weight: 500;
+}

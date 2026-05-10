@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider IsDarkMode="true" Theme="_theme" />
+
+<div class="auth-layout">
+    <header class="auth-header">
+        <a href="/" class="auth-logo">KommissMe</a>
+    </header>
+    <main class="auth-main">
+        @Body
+    </main>
+</div>
+
+@code {
+    MudTheme _theme = new MudTheme
+    {
+        PaletteDark = new PaletteDark
+        {
+            Background = "#0b0a0e"
+        }
+    };
+}

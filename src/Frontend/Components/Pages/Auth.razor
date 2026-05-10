@@ -1,0 +1,128 @@
+@page "/auth"
+@using System.ComponentModel.DataAnnotations
+
+@layout AuthLayout
+
+<div class="form-wrap">
+
+    <div class="tabs" data-mode="@(showLogin ? "login" : "register")">
+        <span class="indicator @(showLogin ? "slide" : "")"></span>
+        <button type="button" class="@(!showLogin ? "active" : "")" @onclick="() => showLogin = false">Register</button>
+        <button type="button" class="@(showLogin ? "active" : "")" @onclick="() => showLogin = true">Sign in</button>
+    </div>
+
+    <div class="form-head">
+        <span class="form-label">@(showLogin ? "Welcome back" : "Manage your dashboard")</span>
+    </div>
+
+    <EditForm Model="@(showLogin ? (object)loginModel : registerModel)" OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="field">
+            <label>Email </label>
+            <div class="input-wrap">
+                <span class="icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg>
+                </span>
+                @if (showLogin)
+                {
+                    <InputText @bind-Value="loginModel.Email" type="email" placeholder="you@studio.com" />
+                    <ValidationMessage For="() => loginModel.Email" />
+                }
+                else
+                {
+                    <InputText @bind-Value="registerModel.Email" type="email" placeholder="you@studio.com" />
+                    <ValidationMessage For="() => registerModel.Email" />
+                }
+            </div>
+        </div>
+
+        <div class="field">
+            <label>
+                Password
+            </label>
+            <div class="input-wrap">
+                <span class="icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                </span>
+                @if (showLogin)
+                {
+                    <InputText @bind-Value="loginModel.Password" type="@(showPassword ? "text" : "password")" placeholder="••••••••" />
+                    <ValidationMessage For="() => loginModel.Password" />
+                }
+                else
+                {
+                    <InputText @bind-Value="registerModel.Password" type="@(showPassword ? "text" : "password")" placeholder="••••••••" />
+                    <ValidationMessage For="() => registerModel.Password" />
+                }
+                <button type="button" class="toggle" @onclick="() => showPassword = !showPassword">@(showPassword ? "Hide" : "Show")</button>
+            </div>
+        </div>
+
+        @if (!showLogin)
+        {
+            <div class="field">
+                <label>Confirm password</label>
+                <div class="input-wrap">
+                    <span class="icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
+                    </span>
+                    <InputText @bind-Value="registerModel.ConfirmPassword" type="@(showConfirm ? "text" : "password")" placeholder="••••••••" />
+                    <ValidationMessage For="() => registerModel.ConfirmPassword" />
+                    <button type="button" class="toggle" @onclick="() => showConfirm = !showConfirm">@(showConfirm ? "Hide" : "Show")</button>
+                </div>
+            </div>
+
+        }
+
+        <button type="submit" class="submit">
+            @(showLogin ? "Sign in" : "Create account")
+        </button>
+    </EditForm>
+
+    <div class="swap">
+        <span>@(showLogin ? "New to KommissMe?" : "Already drawing with us?")</span>
+        <a @onclick="() => showLogin = !showLogin" href="/auth">@(showLogin ? "Create account →" : "Sign in →")</a>
+    </div>
+</div>
+
+@code {
+    bool showLogin = false;
+    bool showPassword = false;
+    bool showConfirm = false;
+
+    RegisterModel registerModel = new();
+    LoginModel loginModel = new();
+
+    async Task HandleSubmit()
+    {
+        if (showLogin)
+            await HandleLogin();
+        else
+            await HandleRegister();
+    }
+
+    async Task HandleRegister() { }
+    async Task HandleLogin() { }
+
+    class RegisterModel
+    {
+        [Required, EmailAddress]
+        public string Email { get; set; } = "";
+
+        [Required, MinLength(8)]
+        public string Password { get; set; } = "";
+
+        [Required, Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
+        public string ConfirmPassword { get; set; } = "";
+    }
+
+    class LoginModel
+    {
+        [Required, EmailAddress]
+        public string Email { get; set; } = "";
+
+        [Required]
+        public string Password { get; set; } = "";
+    }
+}
