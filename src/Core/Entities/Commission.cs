@@ -45,5 +45,7 @@ namespace Core.Entities
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public List<Deliverable> Deliverables { get; set; } = new();
+        public List<Reference> References { get; set; } = new();
     }
 }

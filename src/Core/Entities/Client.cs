@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Core.Entities
 {
@@ -15,5 +14,7 @@ namespace Core.Entities
 
         [Required, MaxLength(100)]
         public string DisplayName { get; set; } = null!;
+
+        public List<Commission> Commissions { get; set; } = new();
     }
 }
