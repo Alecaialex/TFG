@@ -7,3 +7,4 @@ obj/
 *.log
 .DS_Store
 src/API/appsettings.Development.json
+CLAUDE.md
