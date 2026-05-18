@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Base de Datos
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -23,6 +26,10 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 })
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
+
+// NSWAG
+builder.Services.AddOpenApiDocument();
+
 
 // Autenticación JWT
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "ClaveSuperSecretaDePrueba1234567890";
@@ -76,6 +83,9 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Middleware Pipeline
+app.UseOpenApi();
+app.UseSwaggerUi();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
