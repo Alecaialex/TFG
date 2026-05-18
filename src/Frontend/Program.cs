@@ -1,6 +1,6 @@
 using Frontend.Components;
-using Frontend.Services;
 using Frontend.Providers;
+using Infra.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
 
@@ -15,7 +15,7 @@ builder.Services.AddMudServices();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
-builder.Services.AddHttpClient<IAuthService, AuthService>(client =>
+builder.Services.AddHttpClient<AuthService>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"] ?? "http://localhost:5000/");
 });

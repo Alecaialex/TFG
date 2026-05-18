@@ -1,7 +1,7 @@
 ﻿using Core.DTOs;
 using Core.Entities;
-using Core.Interfaces;
 using Infra.Data;
+using Infra.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +11,9 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService _authService;
+        private readonly AuthService _authService;
 
-        public AuthController(IAuthService authService) => _authService = authService;
+        public AuthController(AuthService authService) => _authService = authService;
 
         // Registro de un nuevo usuario
         [HttpPost("register")]

@@ -1,6 +1,5 @@
 using System.Text;
 using Core.Entities;
-using Core.Interfaces;
 using Infra.Data;
 using Infra.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -87,10 +86,6 @@ builder.Services.AddAuthentication(options =>
         }
     };
 });
-
-// Registro de Servicios para inyección de dependencias
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();

@@ -3,13 +3,12 @@ using System.Security.Claims;
 using System.Text;
 using Core.DTOs;
 using Core.Entities;
-using Core.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Infra.Services;
 
-public class TokenService : ITokenService
+public class TokenService
 {
     private readonly IConfiguration _config;
 

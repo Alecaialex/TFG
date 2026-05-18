@@ -1,23 +1,22 @@
 ﻿using Core.DTOs;
 using Core.Entities;
-using Core.Interfaces;
 using Infra.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Services;
 
-public class AuthService : IAuthService
+public class AuthService
 {
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
-    private readonly ITokenService _tokenService;
+    private readonly TokenService _tokenService;
     private readonly AppDbContext _context;
 
     public AuthService(
         UserManager<User> userManager,
         SignInManager<User> signInManager,
-        ITokenService tokenService,
+        TokenService tokenService,
         AppDbContext context)
     {
         _userManager = userManager;
@@ -27,6 +26,7 @@ public class AuthService : IAuthService
     }
 
     // Registro de nuevo usuario
+     
     public async Task<AuthResponseDto?> RegisterAsync(RegisterDTO model)
     {
         // Creamos el objeto del usuario
@@ -50,7 +50,7 @@ public class AuthService : IAuthService
         }
         else
         {
-            _context.Clients.Add(new Client
+            _context.Clients.Add(new Core.Entities.Client
             {
                 Id = user.Id,
                 DisplayName = model.DisplayName
