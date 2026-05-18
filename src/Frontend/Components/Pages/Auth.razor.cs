@@ -3,6 +3,7 @@ using Frontend.Providers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.ComponentModel.DataAnnotations;
+using Infra.Services;
 
 namespace Frontend.Components.Pages
 {
@@ -33,6 +34,7 @@ namespace Frontend.Components.Pages
             errorMessage = null;
             try 
             {
+                var result = await Infra.Services.apiclient
                 var result = await AuthService.RegisterAsync(
                     registerModel.Email,
                     registerModel.Password,
