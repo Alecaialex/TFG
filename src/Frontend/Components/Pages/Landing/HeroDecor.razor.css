@@ -1,0 +1,26 @@
+﻿.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-decor svg {
+    position: absolute;
+    top: -10%;
+    right: -12%;
+    width: 78%;
+    height: 130%;
+}
+
+
+.wrap {
+    position: relative;
+    z-index: 1;
+}
+

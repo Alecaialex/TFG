@@ -1,0 +1,38 @@
+﻿.landing-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    background: rgba(11, 10, 14, 0.6);
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.landing-nav a {
+    color: #b6afbe;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+}
+
+.landing-nav a:hover {
+    color: white;
+}
+
+.nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
