@@ -1,6 +1,8 @@
 ﻿@page "/dashboard"
 @using Frontend.Components.Pages.DashboardComponents
+@using Microsoft.AspNetCore.Authorization
 
+@attribute [Authorize]
 @layout MainLayout
 
 <MainSection/>

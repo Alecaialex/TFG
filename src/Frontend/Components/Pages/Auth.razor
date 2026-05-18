@@ -73,6 +73,29 @@
                 </div>
             </div>
 
+            <div class="field">
+                <label>Display name</label>
+                <div class="input-wrap">
+                    <span class="icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                    </span>
+                    <InputText @bind-Value="registerModel.DisplayName" placeholder="your name or alias" />
+                    <ValidationMessage For="() => registerModel.DisplayName" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="toggle-row">
+                    <span>I'm an artist</span>
+                    <InputCheckbox @bind-Value="registerModel.IsArtist" />
+                </label>
+            </div>
+
+        }
+
+        @if (errorMessage != null)
+        {
+            <div class="error-msg">@errorMessage</div>
         }
 
         <button type="submit" class="submit">
@@ -85,44 +108,3 @@
         <a @onclick="() => showLogin = !showLogin" href="/auth">@(showLogin ? "Create account →" : "Sign in →")</a>
     </div>
 </div>
-
-@code {
-    bool showLogin = false;
-    bool showPassword = false;
-    bool showConfirm = false;
-
-    RegisterModel registerModel = new();
-    LoginModel loginModel = new();
-
-    async Task HandleSubmit()
-    {
-        if (showLogin)
-            await HandleLogin();
-        else
-            await HandleRegister();
-    }
-
-    async Task HandleRegister() { }
-    async Task HandleLogin() { }
-
-    class RegisterModel
-    {
-        [Required, EmailAddress]
-        public string Email { get; set; } = "";
-
-        [Required, MinLength(8)]
-        public string Password { get; set; } = "";
-
-        [Required, Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
-        public string ConfirmPassword { get; set; } = "";
-    }
-
-    class LoginModel
-    {
-        [Required, EmailAddress]
-        public string Email { get; set; } = "";
-
-        [Required]
-        public string Password { get; set; } = "";
-    }
-}
